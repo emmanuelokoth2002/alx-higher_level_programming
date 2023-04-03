@@ -1,5 +1,8 @@
 #!/usr/bin/python3
 
+"""A class description of a rectangle"""
+
+
 class Rectangle:
     """Defines a rectangle."""
 
@@ -7,6 +10,8 @@ class Rectangle:
 
     def __init__(self, width=0, height=0):
         """Initializes a new rectangle."""
+
+
         self.width = width
         self.height = height
         Rectangle.number_of_instances += 1
@@ -14,11 +19,15 @@ class Rectangle:
     @property
     def width(self):
         """Gets the width of the rectangle."""
+
+
         return self.__width
 
     @width.setter
     def width(self, value):
         """Sets the width of the rectangle."""
+
+
         if not isinstance(value, int):
             raise TypeError("width must be an integer")
         elif value < 0:

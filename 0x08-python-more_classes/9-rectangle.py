@@ -4,6 +4,9 @@
 
 
 class Rectangle:
+    """Representation of a rectangle"""
+
+
     number_of_instances = 0
     print_symbol = '#'
 

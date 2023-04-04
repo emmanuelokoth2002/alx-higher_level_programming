@@ -1,11 +1,10 @@
 #!/usr/bin/python3
 
-"""class description for  Rectangle"""
+"""A class description of a rectangle"""
 
 
 class Rectangle:
-    """Representation for class"""
-
+    """Representation of a rectangle"""
 
     def __init__(self, width=0, height=0):
         self.width = width

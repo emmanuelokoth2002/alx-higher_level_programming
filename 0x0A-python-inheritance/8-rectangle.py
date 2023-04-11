@@ -1,13 +1,14 @@
 #!/usr/bin/python3
-"""
-Defines a Rectangle class that inherits from BaseGeometry
-"""
+"""Defines a Rectangle class that inherits from BaseGeometry"""
+
 
 class BaseGeometry:
     """BaseGeometry class"""
 
+
     def area(self):
         """Raises an exception with a message"""
+
 
         raise Exception("area() is not implemented")
 
@@ -32,6 +33,7 @@ class BaseGeometry:
 
 class Rectangle(BaseGeometry):
     """Rectangle class"""
+
 
     def __init__(self, width, height):
         """Initializes a Rectangle instance

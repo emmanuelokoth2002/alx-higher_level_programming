@@ -7,4 +7,4 @@ def lookup(obj):
     """look up function"""
 
 
-    return [attr for attr in dir(obj) if not callable(getattr(obj, attr)) or attr.startswith('__')]
+    return dir(obj)

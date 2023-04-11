@@ -3,8 +3,11 @@
 """Class to inherit from class List"""
 
 class MyList(list):
+    """Class defination"""
+
+    pass
+
     def print_sorted(self):
         """Print the list sorted in ascending order."""
 
-        sorted_list = sorted(self)
-        print(sorted_list)
+        print(sorted(list(self)))

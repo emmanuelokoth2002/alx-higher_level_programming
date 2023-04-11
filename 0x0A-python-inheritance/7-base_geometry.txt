@@ -1,0 +1,62 @@
+#!/usr/bin/python3
+"""
+Test file for BaseGeometry class
+"""
+
+if __name__ == '__main__':
+    bg = BaseGeometry()
+    print(bg)
+
+    try:
+        print(bg.area())
+    except Exception as e:
+        print("[{}] {}".format(e.__class__.__name__, e))
+
+    try:
+        bg.integer_validator("my_int", "not an int")
+    except Exception as e:
+        print("[{}] {}".format(e.__class__.__name__, e))
+
+    try:
+        bg.integer_validator("my_int", -1)
+    except Exception as e:
+        print("[{}] {}".format(e.__class__.__name__, e))
+
+    try:
+        bg.integer_validator("my_int", 3.14)
+    except Exception as e:
+        print("[{}] {}".format(e.__class__.__name__, e))
+
+    print("--")
+
+    class Rectangle(BaseGeometry):
+        def __init__(self, width, height):
+            self.integer_validator("width", width)
+            self.integer_validator("height", height)
+            self.__width = width
+            self.__height = height
+
+        def __str__(self):
+            return "[Rectangle] {}/{}".format(self.__width, self.__height)
+
+        def area(self):
+            return self.__width * self.__height
+
+    r = Rectangle(3, 5)
+    print(r)
+    print("Area: {}".format(r.area()))
+
+    try:
+        r2 = Rectangle(4, "hello")
+    except Exception as e:
+        print("[{}] {}".format(e.__class__.__name__, e))
+
+    try:
+        r3 = Rectangle(-1, 4)
+    except Exception as e:
+        print("[{}] {}".format(e.__class__.__name__, e))
+
+    try:
+        r4 = Rectangle(4, 0)
+    except Exception as e:
+        print("[{}] {}".format(e.__class__.__name__, e))

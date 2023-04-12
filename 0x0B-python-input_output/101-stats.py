@@ -1,37 +1,34 @@
 #!/usr/bin/python3
 
 import sys
+from collections import defaultdict
 
-"""Initialize variables"""
+"""Initialize variables to hold metrics"""
 
 
 total_size = 0
-status_codes = {200: 0, 301: 0, 400: 0, 401: 0, 403: 0, 404: 0, 405: 0, 500: 0}
-line_count = 0
+status_counts = defaultdict(int)
 
 try:
-    """Read input from standard input"""
+    """Read stdin line by line"""
 
 
-    for line in sys.stdin:
-        components = line.split()
-        ip_address = components[0]
-        status_code = int(components[8])
-        file_size = int(components[9])
-        
+    for i, line in enumerate(sys.stdin, 1):
+        parts = line.split()
+        ip_address = parts[0]
+        status_code = int(parts[-2])
+        file_size = int(parts[-1])
+
         total_size += file_size
-        status_codes[status_code] += 1
-        line_count += 1
-        
-        if line_count % 10 == 0:
+        status_counts[status_code] += 1
+
+        if i % 10 == 0:
             print(f"Total file size: {total_size}")
-            for code in sorted(status_codes.keys()):
-                if status_codes[code] > 0:
-                    print(f"{code}: {status_codes[code]}")
+            for code in sorted(status_counts.keys()):
+                print(f"{code}: {status_counts[code]}")
+            print()
 
 except KeyboardInterrupt:
-    
-    print(f"Total file size: {total_size}")
-    for code in sorted(status_codes.keys()):
-        if status_codes[code] > 0:
-            print(f"{code}: {status_codes[code]}")
+    print(f"\nTotal file size: {total_size}")
+    for code in sorted(status_counts.keys()):
+        print(f"{code}: {status_counts[code]}")

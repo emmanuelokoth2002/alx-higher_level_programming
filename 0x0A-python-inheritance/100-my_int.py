@@ -3,14 +3,14 @@
 
 
 class MyInt(int):
+    """Override the == operator to return the opposite original result"""
+
+
     def __eq__(self, other):
-        """Function to returns an integer"""
+        return super().__ne__(other)
+
+    """ Override the != operator to return the opposite original result"""
 
 
-        return int(self) != int(other)
-    
     def __ne__(self, other):
-        """Function to returns an integer"""
-
-
-        return int(self) == int(other)
+        return super().__eq__(other)

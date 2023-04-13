@@ -4,9 +4,6 @@
 
 
 
-import sys
-from collections import defaultdict
-
 total_file_size = 0
 status_codes = defaultdict(int)
 line_count = 0

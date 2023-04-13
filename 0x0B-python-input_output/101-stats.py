@@ -1,34 +1,38 @@
 #!/usr/bin/python3
 
+"""initialize variables and data structures"""
+
+
+
 import sys
 from collections import defaultdict
 
-"""Initialize variables to hold metrics"""
-
-
-total_size = 0
-status_counts = defaultdict(int)
+total_file_size = 0
+status_codes = defaultdict(int)
+line_count = 0
 
 try:
-    """Read stdin line by line"""
+    """read input line by line"""
 
 
-    for i, line in enumerate(sys.stdin, 1):
+    for line in sys.stdin:
         parts = line.split()
         ip_address = parts[0]
-        status_code = int(parts[-2])
-        file_size = int(parts[-1])
+        status_code = parts[8]
+        file_size = int(parts[9])    
+        
 
-        total_size += file_size
-        status_counts[status_code] += 1
-
-        if i % 10 == 0:
-            print(f"Total file size: {total_size}")
-            for code in sorted(status_counts.keys()):
-                print(f"{code}: {status_counts[code]}")
-            print()
-
+        total_file_size += file_size
+        status_codes[status_code] += 1
+        line_count += 1
+        
+        if line_count % 10 == 0:
+            print(f"Total file size: {total_file_size}")
+            for code in sorted(status_codes.keys()):
+                print(f"{code}: {status_codes[code]}")
+            print("---")
+            
 except KeyboardInterrupt:
-    print(f"\nTotal file size: {total_size}")
-    for code in sorted(status_counts.keys()):
-        print(f"{code}: {status_counts[code]}")
+    print(f"Total file size: {total_file_size}")
+    for code in sorted(status_codes.keys()):
+        print(f"{code}: {status_codes[code]}")

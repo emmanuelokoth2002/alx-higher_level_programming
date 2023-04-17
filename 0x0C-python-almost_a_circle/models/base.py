@@ -28,7 +28,16 @@ class Base:
 
     @staticmethod
     def from_json_string(json_string):
-        '''Unjsonifies a dictionary.'''
+        """Unjsonifies a dictionary."""
         if json_string is None or not json_string:
             return []
         return loads(json_string)
+
+    @classmethod
+    def save_to_file(cls, list_objs):
+        """writes the JSON string representation of list_objs to a file"""
+        if list_objs is None:
+            list_objs = []
+        filename = cls.__name__ + ".json"
+        with open(filename, mode='w', encoding='utf-8') as file:
+            file.write(cls.to_json_string([obj.to_dictionary() for obj in list_objs]))

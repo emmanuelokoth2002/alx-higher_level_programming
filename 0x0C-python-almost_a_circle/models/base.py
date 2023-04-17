@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 import json
+import csv
 
 """Class defination"""
 
@@ -127,4 +128,31 @@ class Base:
                 dict_list = cls.from_json_string(json_str)
                 return [cls.create(**d) for d in dict_list]
         except FileNotFoundError:
-            return []    
+            return []
+
+    @classmethod
+    def save_to_file_csv(cls, list_objs):
+        if list_objs is None:
+            list_objs = []
+        filename = cls.__name__ + ".csv"
+        with open(filename, mode='w', encoding='utf-8') as f:
+            writer = csv.writer(f)
+            if cls.__name__ == "Rectangle":
+                for r in list_objs:
+                    writer.writerow([r.id, r.width, r.height, r.x, r.y])
+            elif cls.__name__ == "Square":
+                for s in list_objs:
+                    writer.writerow([s.id, s.size, s.x, s.y])
+
+    @classmethod
+    def load_from_file_csv(cls):
+        filename = cls.__name__ + ".csv"
+        try:
+            with open(filename, mode='r', encoding='utf-8') as f:
+                reader = csv.reader(f)
+                if cls.__name__ == "Rectangle":
+                    return [cls(id=int(row[0]), width=int(row[1]), height=int(row[2]), x=int(row[3]), y=int(row[4])) for row in reader]
+                elif cls.__name__ == "Square":
+                    return [cls(id=int(row[0]), size=int(row[1]), x=int(row[2]), y=int(row[3])) for row in reader]
+        except:
+            return []        

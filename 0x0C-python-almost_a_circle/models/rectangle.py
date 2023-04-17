@@ -91,4 +91,11 @@ class Rectangle(Base):
 
     def __str__(self):
         """Return information on rectangle"""
-        return "[Rectangle] ({}) {}/{} - {}/{}".format(self.id, self.x, self.y, self.width, self.height)            
+        return "[Rectangle] ({}) {}/{} - {}/{}".format(self.id, self.x, self.y, self.width, self.height)
+
+    def display(self):
+    """Prints in stdout the Rectangle instance with the character #"""
+    for i in range(self.y):
+        print()
+    for i in range(self.height):
+        print(' ' * self.x + '#' * self.width)    

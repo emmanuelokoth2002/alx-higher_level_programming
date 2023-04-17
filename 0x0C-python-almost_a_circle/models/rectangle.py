@@ -108,7 +108,7 @@ class Rectangle(Base):
         if len(args) >= 5:
             self.y = args[4]
 
-    def update(self, *args, **kwargs):
+    def _update(self, *args, **kwargs):
         if args:
             attrs = ["id", "width", "height", "x", "y"]
             for i, value in enumerate(args):

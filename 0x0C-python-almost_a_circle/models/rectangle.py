@@ -108,11 +108,9 @@ class Rectangle(Base):
         if len(args) >= 5:
             self.y = args[4]
 
-    def _update(self, *args, **kwargs):
+    def update(self, *args, **kwargs):
+        """Updates instance attributes via no-keyword & keyword args."""
         if args:
-            attrs = ["id", "width", "height", "x", "y"]
-            for i, value in enumerate(args):
-                setattr(self, attrs[i], value)
+            self.__update(*args)
         elif kwargs:
-            for key, value in kwargs.items():
-                setattr(self, key, value)            
+            self.__update(**kwargs)

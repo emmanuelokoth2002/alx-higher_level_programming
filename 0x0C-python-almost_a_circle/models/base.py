@@ -87,4 +87,33 @@ class Base:
             instance = cls.create(**dictionary)
             instances.append(instance)
         return instances
+
+    @classmethod
+    def save_to_file_csv(cls, list_objs):
+        """Writes the CSV string representation of a list of instances to a file"""
+        filename = cls.__name__ + ".csv"
+        if list_objs is None:
+            list_objs = []
+        with open(filename, "w", newline="") as f:
+            writer = csv.writer(f)
+            for obj in list_objs:
+                if cls.__name__ == "Rectangle":
+                    row = [obj.id, obj.width, obj.height, obj.x, obj.y]
+                elif cls.__name__ == "Square":
+                    row = [obj.id, obj.size, obj.x, obj.y]
+                writer.writerow(row)
+
+    @classmethod
+    def load_from_file_csv(cls):
+        """Returns a list of instances from a CSV file"""
+        filename = cls.__name__ + ".csv"
+        try:
+            with open(filename, "r", newline="") as f:
+                reader = csv.reader(f)
+                instances = []
+                for row in reader:
+                    if cls.__name__ == "Rectangle":
+                        dictionary = {
+                            "id": int(row[0]),
+                            "width": int    
     

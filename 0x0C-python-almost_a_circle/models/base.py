@@ -117,3 +117,14 @@ class Base:
             return None
         dummy.update(**dictionary)
         return dummy
+
+    @classmethod
+    def load_from_file(cls):
+        filename = cls.__name__ + ".json"
+        try:
+            with open(filename, mode="r") as f:
+                json_str = f.read()
+                dict_list = cls.from_json_string(json_str)
+                return [cls.create(**d) for d in dict_list]
+        except FileNotFoundError:
+            return []    

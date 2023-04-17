@@ -7,12 +7,15 @@ import turtle
 
 
 class Base:
-     '''A representation of the base of our OOP hierarchy.'''
+     """A representation of the base of our OOP hierarchy."""
 
 
     __nb_objects = 0
 
     def __init__(self, id=None):
+        """constructor"""
+
+
         if id is not None:
             self.id = id
         else:
@@ -21,6 +24,9 @@ class Base:
 
     @staticmethod
     def to_json_string(list_dictionaries):
+        """sonifies a dictionary so it's quite rightly and longer."""
+
+
         if list_dictionaries is None or len(list_dictionaries) == 0:
             return "[]"
         else:
@@ -28,6 +34,9 @@ class Base:
 
     @classmethod
     def save_to_file(cls, list_objs):
+        """Saves jsonified object to file."""
+
+
         filename = cls.__name__ + ".json"
         obj_list = []
         if list_objs is not None:
@@ -38,6 +47,9 @@ class Base:
 
     @staticmethod
     def from_json_string(json_string):
+        """Unjsonifies a dictionary."""
+
+
         if json_string is None or len(json_string) == 0:
             return []
         else:
@@ -45,6 +57,9 @@ class Base:
 
     @classmethod
     def create(cls, **dictionary):
+        """Loads instance from dictionary"""
+
+
         if cls.__name__ == "Rectangle":
             dummy = cls(1, 1)
         elif cls.__name__ == "Square":
@@ -54,6 +69,9 @@ class Base:
 
     @classmethod
     def load_from_file(cls):
+        """Loads string from file and unjsonifies."""
+
+
         filename = cls.__name__ + ".json"
         obj_list = []
         try:
@@ -67,6 +85,9 @@ class Base:
 
     @classmethod
     def save_to_file_csv(cls, list_objs):
+        """Saves object to csv file."""
+
+
         filename = cls.__name__ + ".csv"
         with open(filename, mode="w", newline="") as my_file:
             if list_objs is not None:
@@ -81,6 +102,9 @@ class Base:
 
     @classmethod
     def load_from_file_csv(cls):
+        """Loads object to csv file."""
+
+
         filename = cls.__name__ + ".csv"
         obj_list = []
         try:
@@ -96,6 +120,9 @@ class Base:
 
     @classmethod
     def save_to_file(cls, list_objs):
+        """save to file"""
+
+
         if list_objs is None:
             list_objs = []
         filename = cls.__name__ + ".json"
@@ -114,6 +141,9 @@ class Base:
 
     @classmethod
     def create(cls, **dictionary):
+        """creates a function"""
+
+
         if cls.__name__ == "Rectangle":
             dummy = cls(1, 1)
         elif cls.__name__ == "Square":
@@ -125,6 +155,9 @@ class Base:
 
     @classmethod
     def load_from_file(cls):
+        """load from file"""
+
+
         filename = cls.__name__ + ".json"
         try:
             with open(filename, mode="r") as f:

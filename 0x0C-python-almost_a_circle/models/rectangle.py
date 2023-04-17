@@ -11,6 +11,7 @@ class Rectangle(Base):
 
 
     def __init__(self, width, height, x=0, y=0, id=None):
+        """constructor"""
         super().__init__(id)
         self.width = width
         self.height = height
@@ -19,6 +20,7 @@ class Rectangle(Base):
 
     @property
     def width(self):
+        """width of rectanle"""
         return self.__width
 
     @width.setter
@@ -32,6 +34,7 @@ class Rectangle(Base):
 
     @property
     def height(self):
+        """height of the rectangle"""
         return self.__height
 
     @height.setter
@@ -45,6 +48,7 @@ class Rectangle(Base):
 
     @property
     def x(self):
+        """x in the rectangle"""
         return self.__x
 
     @x.setter
@@ -58,6 +62,7 @@ class Rectangle(Base):
 
     @property
     def y(self):
+        """y in the rectanle"""
         return self.__y
 
     @y.setter
@@ -90,9 +95,11 @@ class Rectangle(Base):
             print(' ' * self.x + '#' * self.width)
 
     def __str__(self):
+         '''Returns string info about this rectangle.'''
         return "[Rectangle] ({}) {}/{} - {}/{}".format(self.id, self.__x, self.__y, self.__width, self.__height)
 
     def update(self, *args, **kwargs):
+         '''Internal method that updates instance attributes via */**args.'''
         if args:
             self.id = args[0]
         if len(args) > 1:

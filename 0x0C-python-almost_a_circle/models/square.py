@@ -19,4 +19,16 @@ class Square(Rectangle):
 
     def __str__(self):
         return "[Square] ({}) {}/{} - {}".format(self.id, self.x, self.y, self.width)
-        
+
+    def update(self, *args, **kwargs):
+        if args:
+            attrs = ['id', 'size', 'x', 'y']
+            for i, value in enumerate(args):
+                setattr(self, attrs[i], value)
+        else:
+            for key, value in kwargs.items():
+                setattr(self, key, value)
+
+    def to_dictionary(self):
+        return {'id': self.id, 'size': self.size, 'x': self.x, 'y': self.y}
+

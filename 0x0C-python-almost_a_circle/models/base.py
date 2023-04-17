@@ -127,33 +127,33 @@ class Base:
         return ret
 
         @staticmethod
-    def draw(list_rectangles, list_squares):
-        screen = turtle.Screen()
-        screen.setup(width=800, height=600)
-        screen.title("Rectangles and Squares")
+        def draw(list_rectangles, list_squares):
+            screen = turtle.Screen()
+            screen.setup(width=800, height=600)
+            screen.title("Rectangles and Squares")
 
-        pen = turtle.Turtle()
-        pen.speed(0)
+            pen = turtle.Turtle()
+            pen.speed(0)
 
-        for rect in list_rectangles:
-            pen.penup()
-            pen.goto(rect.x, rect.y)
-            pen.pendown()
-            pen.color("blue")
-            for _ in range(2):
-                pen.forward(rect.width)
-                pen.left(90)
-                pen.forward(rect.height)
-                pen.left(90)
+            for rect in list_rectangles:
+                pen.penup()
+                pen.goto(rect.x, rect.y)
+                pen.pendown()
+                pen.color("blue")
+              for _ in range(2):
+                    pen.forward(rect.width)
+                    pen.left(90)
+                  pen.forward(rect.height)
+                   pen.left(90)
 
-        for square in list_squares:
-            pen.penup()
-            pen.goto(square.x, square.y)
-            pen.pendown()
-            pen.color("red")
-            for _ in range(4):
-                pen.forward(square.size)
-                pen.left(90)
+            for square in list_squares:
+                pen.penup()
+                pen.goto(square.x, square.y)
+                pen.pendown()
+                pen.color("red")
+                for _ in range(4):
+                    pen.forward(square.size)
+                    pen.left(90)
 
-        turtle.done()
+            turtle.done()
 

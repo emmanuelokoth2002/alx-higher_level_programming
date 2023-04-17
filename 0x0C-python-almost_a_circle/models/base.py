@@ -140,11 +140,11 @@ class Base:
                 pen.goto(rect.x, rect.y)
                 pen.pendown()
                 pen.color("blue")
-              for _ in range(2):
-                    pen.forward(rect.width)
-                    pen.left(90)
-                  pen.forward(rect.height)
-                   pen.left(90)
+            for _ in range(2):
+                pen.forward(rect.width)
+                pen.left(90)
+                pen.forward(rect.height)
+                pen.left(90)
 
             for square in list_squares:
                 pen.penup()

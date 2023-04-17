@@ -108,7 +108,7 @@ class Rectangle(Base):
         if len(args) >= 5:
             self.y = args[4]
 
-    def update(self, *args, **kwargs):
+    def _update(self, *args, **kwargs):
         """Updates instance attributes via no-keyword & keyword args."""
         if args:
             self.__update(*args)

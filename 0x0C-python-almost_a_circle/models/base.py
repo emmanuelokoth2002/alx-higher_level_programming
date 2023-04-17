@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 import json
 import csv
+import turtle
 
 """Class defination"""
 
@@ -155,4 +156,28 @@ class Base:
                 elif cls.__name__ == "Square":
                     return [cls(id=int(row[0]), size=int(row[1]), x=int(row[2]), y=int(row[3])) for row in reader]
         except:
-            return []        
+            return []
+
+    @staticmethod
+    def draw(list_rectangles, list_squares):
+        window = turtle.Screen()
+        t = turtle.Turtle()
+        t.speed(1)
+        t.penup()
+        for rect in list_rectangles:
+            t.goto(rect.x, rect.y)
+            t.pendown()
+            for _ in range(2):
+                t.forward(rect.width)
+                t.left(90)
+                t.forward(rect.height)
+                t.left(90)
+            t.penup()
+        for square in list_squares:
+            t.goto(square.x, square.y)
+            t.pendown()
+            for _ in range(4):
+                t.forward(square.size)
+                t.left(90)
+            t.penup()
+        window.exitonclick()        

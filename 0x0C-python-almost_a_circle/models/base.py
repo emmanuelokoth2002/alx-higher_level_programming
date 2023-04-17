@@ -19,7 +19,7 @@ class Base:
             self.__class__.__nb_objects += 1
             self.id = self.__class__.__nb_objects
 
-     @staticmethod
+    @staticmethod
     def to_json_string(list_dictionaries):
         """JSON string representation of list_dictionaries"""
         if list_dictionaries is None or len(list_dictionaries) == 0:

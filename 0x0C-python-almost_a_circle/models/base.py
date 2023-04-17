@@ -88,4 +88,12 @@ class Base:
         except FileNotFoundError:
             pass
         return obj_list
-            
+
+    @classmethod
+    def save_to_file(cls, list_objs):
+        if list_objs is None:
+            list_objs = []
+        filename = cls.__name__ + ".json"
+        dicts = [obj.to_dictionary() for obj in list_objs]
+        with open(filename, mode="w", encoding="UTF-8") as f:
+            f.write(cls.to_json_string(dicts))

@@ -90,30 +90,38 @@ class Base:
 
     @classmethod
     def save_to_file_csv(cls, list_objs):
-        """Writes the CSV string representation of a list of instances to a file"""
-        filename = cls.__name__ + ".csv"
-        if list_objs is None:
-            list_objs = []
-        with open(filename, "w", newline="") as f:
+        """Saves object."""
+        from models.rectangle import Rectangle
+        from models.square import Square
+        if list_objs is not None:
+            if cls is Rectangle:
+                list_objs = [[o.id, o.width, o.height, o.x, o.y]
+                             for o in list_objs]
+            else:
+                list_objs = [[o.id, o.size, o.x, o.y]
+                             for o in list_objs]
+        with open('{}.csv'.format(cls.__name__), 'w', newline='',
+                  encoding='utf-8') as f:
             writer = csv.writer(f)
-            for obj in list_objs:
-                if cls.__name__ == "Rectangle":
-                    row = [obj.id, obj.width, obj.height, obj.x, obj.y]
-                elif cls.__name__ == "Square":
-                    row = [obj.id, obj.size, obj.x, obj.y]
-                writer.writerow(row)
+            writer.writerows(list_objs)
 
     @classmethod
     def load_from_file_csv(cls):
-        """Returns a list of instances from a CSV file"""
-        filename = cls.__name__ + ".csv"
-        try:
-            with open(filename, "r", newline="") as f:
-                reader = csv.reader(f)
-                instances = []
-                for row in reader:
-                    if cls.__name__ == "Rectangle":
-                        dictionary = {
-                            "id": int(row[0]),
-                            "width": int    
-    
+        """Loads object."""
+        from models.rectangle import Rectangle
+        from models.square import Square
+        ret = []
+        with open('{}.csv'.format(cls.__name__), 'r', newline='',
+                  encoding='utf-8') as f:
+            reader = csv.reader(f)
+            for row in reader:
+                row = [int(r) for r in row]
+                if cls is Rectangle:
+                    d = {"id": row[0], "width": row[1], "height": row[2],
+                         "x": row[3], "y": row[4]}
+                else:
+                    d = {"id": row[0], "size": row[1],
+                         "x": row[2], "y": row[3]}
+                ret.append(cls.create(**d))
+        return ret
+

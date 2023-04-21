@@ -83,17 +83,17 @@ class Rectangle(Base):
     def area(self):
         """Returns the area of the rectangle."""
         return self.__width * self.__height
-    
+
     def display(self):
         '''Prints string representation of this rectangle.'''
         s = '\n' * self.y + \
             (' ' * self.x + '#' * self.width + '\n') * self.height
         print(s, end='')
 
-
     def __str__(self):
         """Return information on rectangle"""
-        return "[Rectangle] ({}) {}/{} - {}/{}".format(self.id, self.x, self.y, self.width, self.height)
+        template = string.Template("[Rectangle] (\$id) \$x/\$y - \$width/\$height")
+        return template.substitute(id=self.id, x=self.x, y=self.y, width=self.width, height=self.height)
 
     def update(self, *args):
         """assigns an argument to each attribute"""
@@ -123,4 +123,4 @@ class Rectangle(Base):
             "height": self.height,
             "x": self.x,
             "y": self.y
-        }            
+            }

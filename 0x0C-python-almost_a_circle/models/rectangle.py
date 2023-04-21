@@ -111,9 +111,12 @@ class Rectangle(Base):
     def _update(self, *args, **kwargs):
         """Updates instance attributes via no-keyword & keyword args."""
         if args:
-            self.__update(*args)
-        elif kwargs:
-            self.__update(**kwargs)
+            attrs = ["id", "width", "height", "x", "y"]
+            for i, arg in enumerate(args):
+                setattr(self, attrs[i], arg)
+        else:
+            for key, value in kwargs.items():
+                setattr(self, key, value)    
 
     def to_dictionary(self):
         """Return a dictionary representation of the rectangle"""

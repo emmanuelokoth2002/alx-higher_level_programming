@@ -1,4 +1,6 @@
 --  database hbtn_0d_usa and the table cities
+USE hbtn_0d_usa;
+CREATE DATABASE IF NOT EXISTS hbtn_0d_usa;
 CREATE TABLE cities (
         id INT AUTO_INCREMENT PRIMARY KEY,
         state_id INT NOT NULL,

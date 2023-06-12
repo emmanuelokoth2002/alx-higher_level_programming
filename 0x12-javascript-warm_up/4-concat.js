@@ -10,5 +10,5 @@ else if (arg1) {
 	console.log(`${arg1} is undefined`);
 }
 else {
-  console.log("undefined is undefined");
+  console.log('undefined is undefined');
 }

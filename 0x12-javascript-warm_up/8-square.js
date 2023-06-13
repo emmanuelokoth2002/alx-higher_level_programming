@@ -1,17 +1,7 @@
 #!/usr/bin/node
-
-const size = process.argv[2];
-
+const size = parseInt(process.argv[2]);
 if (!isNaN(size)) {
-  const sizeInt = parseInt(size);
-  
-  for (let i = 0; i < sizeInt; i++) {
-    let line = '';
-    for (let j = 0; j < sizeInt; j++) {
-      line += 'X';
-    }
-    console.log(line);
+  for (let x = 0; x < size; i++) {
+    console.log('X'.repeat(size));
   }
-} else {
-  console.log('Missing size');
-}
+} else { console.log('Missing size'); }

@@ -6,7 +6,7 @@ import sys
 
 if __name__ == "__main__":
     if len(sys.argv) != 5:
-        print("Usage: ./4-cities_by_state.py [username] [password] [database] [state]")
+        print("Usage: ./5-filter_cities.py [username] [password] [database] [state]")
         sys.exit(1)
 
     username = sys.argv[1]
@@ -19,16 +19,19 @@ if __name__ == "__main__":
                                      user=username, passwd=password, db=database)
         cursor = connection.cursor()
         sql = """
-        SELECT cities.id, cities.name, states.name
+        SELECT GROUP_CONCAT(cities.name SEPARATOR ', ')
         FROM cities
         INNER JOIN states ON cities.state_id = states.id
         WHERE states.name = %s
-        ORDER BY cities.id ASC
+        GROUP BY states.name
         """
         cursor.execute(sql, (state,))
-        query_rows = cursor.fetchall()
-        for row in query_rows:
-            print(row)
+        query_row = cursor.fetchone()
+        if query_row:
+            cities = query_row[0]
+            print(cities)
+        else:
+            print("No cities found for the given state.")
         cursor.close()
         connection.close()
     except MySQLdb.Error as e:

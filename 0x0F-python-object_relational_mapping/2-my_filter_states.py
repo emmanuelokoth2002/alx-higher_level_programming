@@ -1,40 +1,19 @@
 #!/usr/bin/python3
-"""takes in an argument and displays all values in the states table"""
+"""takes in an argument and displays all values in the states table """
 
 import MySQLdb
-import sys
+from sys import argv
 
 if __name__ == "__main__":
-    if len(sys.argv) != 5:
-        print("Usage: ./2-my_filter_states.py <mysql_username> <mysql_password> <database_name> <state_name>")
-        sys.exit(1)
-
-    username = sys.argv[1]
-    password = sys.argv[2]
-    database = sys.argv[3]
-    state_name = sys.argv[4]
-
-    try:
-        db = MySQLdb.connect(
-            host="localhost",
-            port=3306,
-            user=username,
-            passwd=password,
-            db=database
-        )
-
-        cursor = db.cursor()
-
-        cursor.execute("SELECT * FROM states WHERE name LIKE BINARY %s ORDER BY id ASC", (state_name,))
-
-        rows = cursor.fetchall()
-
-        for row in rows:
-            print(row)
-
-        cursor.close()
-        db.close()
-
-    except MySQLdb.Error as e:
-        print("MySQL Error:", e)
-        sys.exit(1)
+    connection = MySQLdb.connect(host="localhost", port=3306,
+                                 user=argv[1], passwd=argv[2], db=argv[3])
+    cursor = connection.cursor()
+    sql = """
+    SELECT * FROM states WHERE name LIKE BINARY '{}' ORDER BY states.id ASC"""
+    sql = sql.format(argv[4])
+    cursor.execute(sql)
+    query_rows = cursor.fetchall()
+    for row in query_rows:
+        print(row)
+    cursor.close()
+    connection.close()

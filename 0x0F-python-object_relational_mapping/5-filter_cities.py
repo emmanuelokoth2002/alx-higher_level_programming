@@ -1,38 +1,39 @@
 #!/usr/bin/python3
-"""Lists all cities of a state from hbtn_0e_4_usa database"""
+"""Lists all cities of a given state from the database hbtn_0e_4_usa"""
 
-import MySQLdb
 import sys
+import MySQLdb
 
 if __name__ == "__main__":
-    if len(sys.argv) != 5:
-        print("Usage: ./5-filter_cities.py [username] [password] [database] [state]")
-        sys.exit(1)
-
     username = sys.argv[1]
     password = sys.argv[2]
-    database = sys.argv[3]
-    state = sys.argv[4]
+    db_name = sys.argv[3]
+    state_name = sys.argv[4]
 
-    try:
-        connection = MySQLdb.connect(host="localhost", port=3306,
-                                     user=username, passwd=password, db=database)
-        cursor = connection.cursor()
-        sql = """
-        SELECT GROUP_CONCAT(cities.name SEPARATOR ', ')
+    db = MySQLdb.connect(
+        host="localhost",
+        port=3306,
+        user=username,
+        passwd=password,
+        db=db_name
+    )
+
+    cursor = db.cursor()
+
+    query = """
+        SELECT cities.name
         FROM cities
         INNER JOIN states ON cities.state_id = states.id
         WHERE states.name = %s
-        GROUP BY states.name
-        """
-        cursor.execute(sql, (state,))
-        query_row = cursor.fetchone()
-        if query_row:
-            cities = query_row[0]
-            print(cities)
-        else:
-            print("No cities found for the given state.")
-        cursor.close()
-        connection.close()
-    except MySQLdb.Error as e:
-        print("Error connecting to MySQL:", e)
+        ORDER BY cities.id ASC
+    """
+    cursor.execute(query, (state_name,))
+
+    rows = cursor.fetchall()
+
+    cities = [row[0] for row in rows]
+
+    print(", ".join(cities))
+
+    cursor.close()
+    db.close()

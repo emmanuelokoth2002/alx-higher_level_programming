@@ -15,7 +15,8 @@ if __name__ == "__main__":
 
     try:
         connection = MySQLdb.connect(host="localhost", port=3306,
-                                     user=username, passwd=password, db=database)
+                                     user=username, passwd=password,
+                                     db=database)
         cursor = connection.cursor()
         sql = """
         SELECT cities.id, cities.name, states.name

@@ -14,4 +14,4 @@ response=$(curl -sI "$1")
 content_length=$(echo "$response" | grep -i "Content-Length:" | awk '{print $2}' | tr -d '\r')
 
 # Display the size of the response body in bytes
-echo "10"
+echo "$content_length"

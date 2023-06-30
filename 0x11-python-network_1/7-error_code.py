@@ -2,7 +2,8 @@
 """
 Python script that takes a URL as an argument, sends a request to the URL,
 and displays the body of the response.If the HTTP status code is greater than
-or equal to 400, it prints an error message with the value of the HTTP status code.
+or equal to 400, it prints an error message with the value of the HTTP status
+code.
 """
 
 import requests

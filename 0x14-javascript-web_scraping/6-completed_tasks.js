@@ -17,6 +17,8 @@ request.get(apiUrl, (error, response, body) => {
   } else {
     if (response.statusCode === 200) {
       const tasksData = JSON.parse(body);
+
+      // Create an object to store the number of completed tasks by user ID
       const completedTasksByUser = {};
 
       // Count the number of completed tasks for each user

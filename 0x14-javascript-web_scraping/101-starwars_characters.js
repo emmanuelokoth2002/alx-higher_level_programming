@@ -20,11 +20,16 @@ request.get(apiUrl, (error, response, body) => {
       const movieData = JSON.parse(body);
       const charactersUrls = movieData.characters;
 
-      // Use a counter to keep track of the characters
+      // Use a counter and a recursive function to fetch and print characters sequentially
       let count = 0;
 
-      // Function to fetch and print the character's name based on the character URL
-      const fetchCharacter = (characterUrl) => {
+      const fetchAndPrintCharacter = () => {
+        if (count === charactersUrls.length) {
+          // All characters have been fetched, exit the script
+          process.exit();
+        }
+
+        const characterUrl = charactersUrls[count];
         request.get(characterUrl, (charError, charResponse, charBody) => {
           if (charError) {
             console.error(charError);
@@ -33,11 +38,7 @@ request.get(apiUrl, (error, response, body) => {
               const characterData = JSON.parse(charBody);
               console.log(characterData.name);
               count++;
-
-              // If all characters are fetched, exit the script
-              if (count === charactersUrls.length) {
-                process.exit();
-              }
+              fetchAndPrintCharacter(); // Fetch the next character
             } else {
               console.error(`Error: ${charResponse.statusCode}`);
             }
@@ -45,8 +46,7 @@ request.get(apiUrl, (error, response, body) => {
         });
       };
 
-      // Fetch and print the characters in the same order as the list "characters" in the /films/ response
-      charactersUrls.forEach(fetchCharacter);
+      fetchAndPrintCharacter(); // Start fetching and printing characters
     } else {
       console.error(`Error: ${response.statusCode}`);
     }
